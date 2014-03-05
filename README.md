@@ -5,6 +5,8 @@ A tool for merging multiple video files with the same specifications into one vi
 
 It uses ffmpeg for the merging process and MediaInfo to get video duration.
 
+Binaries for testing without compiling will be available soon!
+
 ###### Current GUI:
 
 ![](http://i.imgur.com/sL3lw8D.png)

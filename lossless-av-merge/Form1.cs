@@ -21,6 +21,12 @@ namespace lossless_av_merge
 
         public Form1()
         {
+            if (File.Exists(Environment.CurrentDirectory + "\\bin\\ffmpeg.exe") == false)
+            {
+                MessageBox.Show("Could not find the ffmpeg.exe binary in \\bin. Get ffmpeg.exe at http://ffmpeg.zeranoe.com/builds/ or compile it yourself." +
+                    "\nThe program can not continue.", "ffmpeg.exe not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
+            }
             videoEncoder = new SharpFFmpegEnc.VideoEncoder(Environment.CurrentDirectory + "\\bin\\ffmpeg.exe");
 
             InitializeComponent();
@@ -36,7 +42,8 @@ namespace lossless_av_merge
         {
             videoEncoder.EventEncodingProgressChanged += videoEncoder_EventEncodingProgressChanged;
             videoEncoder.EventEncodingCompleted += videoEncoder_EventEncodingCompleted;
-
+            //Drag and drop must be allowed
+            listFiles.AllowDrop = true;
             cContainer.Text = cContainer.Items[1].ToString();
         }
 
@@ -44,7 +51,7 @@ namespace lossless_av_merge
         {
             MessageBox.Show("Done!");
             UpdateProgressBar(100);
-            System.IO.File.WriteAllText(@"D:\Other\test.txt", fullOutput);
+            System.IO.File.WriteAllText(Environment.CurrentDirectory + "\\log.txt", fullOutput);
         }
 
         void videoEncoder_EventEncodingProgressChanged(int frame, int frameRate, int size, TimeSpan time, int bitrate)
@@ -225,7 +232,7 @@ namespace lossless_av_merge
                 "PB1\n" +
                 "\n" + 
                 "Written in C# with .NET Framework 4.5.1\n" + 
-                "by MightyNerd\n" + 
+                "by MightyNerd, licenced under GPL v2\n" + 
                 "\n" + 
                 "This program uses FFmpeg which is licenced under the LGPL licence. " + 
                 "FFmpeg uses third party libriaries licenced under the GPL licence.\n" + 
@@ -235,6 +242,31 @@ namespace lossless_av_merge
                 "This program's icons come from the Silk icon pack from http://www.famfamfam.com/"
                 
                 , "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormHelp formHelp = new FormHelp();
+            formHelp.Show();
+        }
+
+        //Drag and drop into listFiles:
+        private void listFiles_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] droppedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in droppedFiles)
+            {
+                AddFileToList(file);
+            }
+        }
+
+        private void listFiles_DragEnter(object sender, DragEventArgs e)
+        {
+            //Drag and drop mouse effect:
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
         }
     }
 }

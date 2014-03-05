@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAddForlder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddForlder.Designer.cs">
+      <DependentUpon>FormAddForlder.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAdvanced.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,12 @@
       <DependentUpon>FormAdvanced.cs</DependentUpon>
     </Compile>
     <Compile Include="FormatDataLenght.cs" />
+    <Compile Include="FormHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHelp.Designer.cs">
+      <DependentUpon>FormHelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaInfo\MediaInfoDLL.cs" />
     <Compile Include="MediaInfo\MediaInfoWrapper.cs" />
     <Compile Include="Program.cs" />
@@ -66,8 +78,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAddForlder.resx">
+      <DependentUpon>FormAddForlder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAdvanced.resx">
       <DependentUpon>FormAdvanced.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHelp.resx">
+      <DependentUpon>FormHelp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
